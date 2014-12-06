@@ -29,6 +29,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testSendRequests() {
         if (!$this->CONNECTION_IS_SET) {
             $this->markTestIncomplete("Please define environment var INSIGHT_CONNECTION_STRING to run this test.");
+            return;
         }
 
         $insight_client = new Client($this->CONNECTION_STRING);
@@ -50,6 +51,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testSendRequestError() {
         if (!$this->CONNECTION_IS_SET) {
             $this->markTestIncomplete("Please define environment var INSIGHT_CONNECTION_STRING to run this test.");
+            return;
         }
 
         // expects exception
