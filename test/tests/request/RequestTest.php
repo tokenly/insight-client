@@ -70,7 +70,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
 
     public function setup() {
-        $this->CONNECTION_STRING = getenv('INSIGHT_CONNECTION_STRING') ?: 'http://localhost:3000';
+        $this->CONNECTION_STRING = getenv('INSIGHT_CONNECTION_STRING') ?: null;
         $this->CONNECTION_IS_SET = strlen($this->CONNECTION_STRING) ? true : false;
     }
 
