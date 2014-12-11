@@ -13,9 +13,9 @@ use Tokenly\Insight\Client;
 class InsightServiceProvider extends ServiceProvider
 {
 
+
     public function boot()
     {
-        $this->package('tokenly/insight-client', 'insight-client', __DIR__.'/../../');
     }
 
     /**
@@ -25,6 +25,8 @@ class InsightServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->package('tokenly/insight-client', 'insight-client', __DIR__.'/../../');
+
         $this->app->bind('Tokenly\Insight\Client', function($app) {
             $config = $app['config']['insight-client::insight'];
             $client = new Client($config['connection_string']);
