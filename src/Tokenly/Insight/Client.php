@@ -33,6 +33,14 @@ class Client
         return $this->callAPI('/tx/'.$txid);
     }
 
+    public function getBestBlockHash() {
+        return $this->getStatus('getBestBlockHash');
+    }
+
+    public function getStatus($status_cmd) {
+        return $this->callAPI('/status?q='.$status_cmd);
+    }
+
     public function callAPI($path, $arguments=[]) {
         // get the client
         $client = $this->buildClient();
