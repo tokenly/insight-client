@@ -33,6 +33,10 @@ class Client
         return $this->callAPI('/tx/'.$txid);
     }
 
+    public function getTransactions($txids) {
+        return $this->callAPI('/tx/'.$txid);
+    }
+
     public function getUnspentTransactions($address) {
         // /api/addr/[:addr]/utxo[?noCache=1]
         return $this->callAPI('/addr/'.$address.'/utxo');
@@ -69,7 +73,7 @@ class Client
         }
 
         // return JSON
-        if ($json) { return $json; }
+        if (is_array($json)) { return $json; }
 
         throw new Exception("Unexpected Response: ".$response, 1);
     }
