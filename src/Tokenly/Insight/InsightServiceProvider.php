@@ -4,6 +4,7 @@ namespace Tokenly\Insight;
 
 
 use Exception;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Tokenly\Insight\Client;
 
@@ -12,7 +13,6 @@ use Tokenly\Insight\Client;
 */
 class InsightServiceProvider extends ServiceProvider
 {
-
 
     public function boot()
     {
@@ -25,14 +25,24 @@ class InsightServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->package('tokenly/insight-client', 'insight-client', __DIR__.'/../../');
+        $this->bindConfig();
 
         $this->app->bind('Tokenly\Insight\Client', function($app) {
-            $config = $app['config']['insight-client::insight'];
-            $client = new Client($config['connection_string']);
+            $client = new Client(Config::get('insight.connection_string'));
             return $client;
         });
     }
 
-}
+    protected function bindConfig()
+    {
 
+        // simple config
+        $config = [
+            'insight.connection_string' => env('INSIGHT_CONNECTION_STRING', 'http://localhost:3000'),
+        ];
+
+        // set the laravel config
+        Config::set($config);
+    }
+
+}
